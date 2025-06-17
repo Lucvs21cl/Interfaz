@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .option-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 200px;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido al Sistema</h1>
+        <div class="options">
+            <div class="option-card" onclick="window.location.href='encuesta.html'">
+                <h2>Rellenar Encuesta</h2>
+                <p>Complete nuestra encuesta de satisfacción</p>
+            </div>
+            <div class="option-card" onclick="window.location.href='paquete.html'">
+                <h2>Solicitar Paquete</h2>
+                <p>Información sobre nuestros paquetes</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #166fe5;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #1877f2;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta de Satisfacción</h1>
+        <form>
+            <div class="form-group">
+                <label for="pregunta1">¿Cómo calificaría nuestro servicio?</label>
+                <textarea id="pregunta1" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pregunta2">¿Qué aspectos podríamos mejorar?</label>
+                <textarea id="pregunta2" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pregunta3">¿Recomendaría nuestros servicios?</label>
+                <textarea id="pregunta3" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="numero">Ingrese un número de referencia:</label>
+                <input type="number" id="numero" required>
+            </div>
+            <button type="submit">Enviar Encuesta</button>
+        </form>
+        <a href="home.html" class="back-link">Volver a la página principal</a>
+    </div>
+</body>
+</html> 
