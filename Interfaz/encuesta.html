@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Post Vuelo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('imagen2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .rating-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .rating-item {
+            background-color: rgba(248, 249, 250, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .rating-item label {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .stars {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .star {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star:hover,
+        .star.active {
+            color: #ffd700;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #1557b0;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+            .rating-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        .satisfaction-group {
+            background-color: rgba(248, 249, 250, 0.9);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        .satisfaction-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .satisfaction-option {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .satisfaction-option[data-level="bajo"] {
+            border-color: #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        .satisfaction-option[data-level="medio"] {
+            border-color: #ffc107;
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+        .satisfaction-option[data-level="alto"] {
+            border-color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        .satisfaction-option[data-level="bajo"]:hover,
+        .satisfaction-option[data-level="bajo"].selected {
+            background-color: rgba(220, 53, 69, 0.2);
+            border-color: #dc3545;
+        }
+        .satisfaction-option[data-level="medio"]:hover,
+        .satisfaction-option[data-level="medio"].selected {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-color: #ffc107;
+        }
+        .satisfaction-option[data-level="alto"]:hover,
+        .satisfaction-option[data-level="alto"].selected {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-color: #28a745;
+        }
+        .satisfaction-option h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .satisfaction-option[data-level="bajo"] h3 {
+            color: #dc3545;
+        }
+        .satisfaction-option[data-level="medio"] h3 {
+            color: #ffc107;
+        }
+        .satisfaction-option[data-level="alto"] h3 {
+            color: #28a745;
+        }
+        .satisfaction-option p {
+            margin: 0.5rem 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Evaluación Post Vuelo</h1>
+        <form id="evaluationForm">
+            <div class="rating-group">
+                <div class="rating-item">
+                    <label>Servicio de WiFi a bordo:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Conveniencia de horario de salida/llegada:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Facilidad de reserva online:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Ubicación de la puerta:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Comida y bebida:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Embarque online:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Comodidad del asiento:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Entretenimiento a bordo:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Servicio a bordo:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Servicio de espacio para piernas:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Manejo de equipaje:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Servicio de check-in:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Servicio durante el vuelo:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <label>Limpieza:</label>
+                    <div class="stars" data-rating="0">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+            </div>
+            <div class="satisfaction-group">
+                <label>Satisfacción General:</label>
+                <div class="satisfaction-options">
+                    <div class="satisfaction-option" data-level="bajo">
+                        <h3>Bajo</h3>
+                        <p>No cumplió con mis expectativas</p>
+                    </div>
+                    <div class="satisfaction-option" data-level="medio">
+                        <h3>Medio</h3>
+                        <p>Cumplió con lo esperado</p>
+                    </div>
+                    <div class="satisfaction-option" data-level="alto">
+                        <h3>Alto</h3>
+                        <p>Superó mis expectativas</p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Enviar Evaluación</button>
+        </form>
+        <a href="home.html" class="back-link">Volver a la página principal</a>
+    </div>
+
+    <script>
+        document.querySelectorAll('.stars').forEach(starsContainer => {
+            const stars = starsContainer.querySelectorAll('.star');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const value = star.getAttribute('data-value');
+                    starsContainer.setAttribute('data-rating', value);
+                    
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-value') <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+
+        document.querySelectorAll('.satisfaction-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.satisfaction-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+            });
+        });
+
+        document.getElementById('evaluationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ratings = {};
+            document.querySelectorAll('.rating-item').forEach(item => {
+                const label = item.querySelector('label').textContent;
+                const rating = item.querySelector('.stars').getAttribute('data-rating');
+                ratings[label] = rating;
+            });
+
+            const satisfactionOption = document.querySelector('.satisfaction-option.selected');
+            if (satisfactionOption) {
+                ratings['Satisfacción General'] = satisfactionOption.getAttribute('data-level');
+            }
+
+            console.log('Evaluación:', ratings);
+            alert('¡Gracias por su evaluación!');
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html> 

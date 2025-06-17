@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Aerolínea</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .left-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100vh;
+            background-color: #f8f9fa;
+            clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .right-section {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            background: url('WhatsApp Image 2025-06-17 at 19.21.39.jpeg') no-repeat center center;
+            background-size: cover;
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+        }
+        .login-container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+            margin-left: -15%;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #1557b0;
+        }
+        .register-button {
+            background-color: transparent;
+            color: #1a73e8;
+            border: 2px solid #1a73e8;
+            margin-top: 1rem;
+        }
+        .register-button:hover {
+            background-color: #f0f7ff;
+        }
+        h2 {
+            color: #1a73e8;
+            margin-bottom: 1.5rem;
+            font-size: 24px;
+        }
+        @media (max-width: 768px) {
+            .left-section {
+                width: 100%;
+                clip-path: none;
+            }
+            .right-section {
+                display: none;
+            }
+            .login-container {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <div class="login-container">
+            <img src="logo.jpeg" alt="Logo Aerolínea" class="logo">
+            <h2>Bienvenido</h2>
+            <form onsubmit="window.location.href='home.html'; return false;">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" placeholder="Ingrese su usuario">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
+                </div>
+                <button type="submit">Ingresar</button>
+            </form>
+            <button class="register-button" onclick="window.location.href='registro.html'">Registrar Usuario</button>
+        </div>
+    </div>
+    <div class="right-section"></div>
+</body>
+</html> 
